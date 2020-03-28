@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.core.constants;
+package com.github.thierrysquirrel.codec.core.constants;
 
 
 /**
@@ -26,25 +26,25 @@ package com.github.thierrysquirrel.core.constants;
  * @since JDK 1.8
  */
 public enum URLCodecConstants {
-	/**
-	 * 拆分符
-	 */
-	PREFIX('?'),
-	/**
-	 * 连接符
-	 */
-	CONNECT('='),
-	/**
-	 * 拆分符
-	 */
-	SUFFIX('&');
-	private char value;
+    /**
+     * 拆分符
+     */
+    PREFIX ('?'),
+    /**
+     * 连接符
+     */
+    CONNECT ('='),
+    /**
+     * 拆分符
+     */
+    SUFFIX ('&');
+    private char value;
 
-	URLCodecConstants(char value) {
-		this.value = value;
-	}
+    URLCodecConstants(char value) {
+        this.value = value;
+    }
 
-	public char getValue() {
-		return value;
-	}
+    public char getValue() {
+        return value;
+    }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.core.builder;
+package com.github.thierrysquirrel.codec.core.builder;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.EncoderException;
@@ -29,41 +29,35 @@ import org.apache.commons.codec.net.URLCodec;
  * @since JDK 1.8
  */
 public class StringCoderBuilder {
-	private StringBuilder stringBuilder;
-	private URLCodec codec;
+    private StringBuilder stringBuilder;
+    private URLCodec codec;
 
-	public StringCoderBuilder() {
-		stringBuilder = new StringBuilder();
-	}
+    public StringCoderBuilder() {
+        stringBuilder = new StringBuilder ();
+    }
 
-	public StringCoderBuilder(String data) {
-		this.stringBuilder = new StringBuilder(data);
-	}
+    public void append(String data) {
+        stringBuilder.append (data);
+        codec = new URLCodec ();
+    }
 
-	public StringCoderBuilder append(String data) {
-		stringBuilder.append(data);
-		codec = new URLCodec();
-		return this;
-	}
+    public void appendEncode(String data) throws EncoderException {
+        append (codec.encode (data));
+    }
 
-	public StringCoderBuilder appendEncode(String data) throws EncoderException {
-		append(codec.encode(data));
-		return this;
-	}
+    public void appendDecode(String data) throws DecoderException {
+        append (codec.decode (data));
+    }
 
-	public StringCoderBuilder appendDecode(String data) throws DecoderException {
-		append(codec.decode(data));
-		return this;
-	}
+    public void appendEncodeOrDecode(String data, Boolean encode) throws EncoderException, DecoderException {
+        if (Boolean.TRUE.equals (encode)) {
+            appendEncode (data);
+        } else {
+            appendDecode (data);
+        }
+    }
 
-	public StringCoderBuilder appendEncodeOrDecode(String data, Boolean encode) throws EncoderException, DecoderException {
-		if (encode) {
-			return appendEncode(data);
-		}
-		return appendDecode(data);
-	}
-
-	public String builder() {
-		return stringBuilder.toString();
-	}
+    public String builder() {
+        return stringBuilder.toString ();
+    }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.core.constants;
+package com.github.thierrysquirrel.codec.core.constants;
 
 /**
  * ClassName: CodecConstants
@@ -25,30 +25,30 @@ package com.github.thierrysquirrel.core.constants;
  * @since JDK 1.8
  */
 public enum CodecConstants {
-	/**
-	 * RSA
-	 */
-	SIGN_TYPE_RSA("RSA"),
-	/**
-	 * RSA2
-	 */
-	SIGN_TYPE_RSA2("RSA2"),
-	/**
-	 * SHA1WithRSA
-	 */
-	SIGN_ALGORITHMS("SHA1WithRSA"),
-	/**
-	 * SHA256WithRSA
-	 */
-	SIGN_SHA256RSA_ALGORITHMS("SHA256WithRSA");
-	private String value;
+    /**
+     * RSA
+     */
+    SIGN_TYPE_RSA ("RSA"),
+    /**
+     * RSA2
+     */
+    SIGN_TYPE_RSA2 ("RSA2"),
+    /**
+     * SHA1WithRSA
+     */
+    SIGN_ALGORITHMS ("SHA1WithRSA"),
+    /**
+     * SHA256WithRSA
+     */
+    SIGN_SHA256RSA_ALGORITHMS ("SHA256WithRSA");
+    private String value;
 
 
-	CodecConstants(String value) {
-		this.value = value;
-	}
+    CodecConstants(String value) {
+        this.value = value;
+    }
 
-	public String getValue() {
-		return value;
-	}
+    public String getValue() {
+        return value;
+    }
 }

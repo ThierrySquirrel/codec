@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.factory.utils;
+package com.github.thierrysquirrel.codec.factory.utils;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -35,30 +35,30 @@ import java.security.spec.X509EncodedKeySpec;
  * @since JDK 1.8
  */
 public class KeyFactoryUtils {
-	private KeyFactoryUtils() {
-	}
+    private KeyFactoryUtils() {
+    }
 
-	public static PublicKey getPublicKey(String algorithm, String publicKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		KeyFactory keyFactory = getKeyFactory(algorithm);
-		byte[] encodedKey = getEncodedKey(publicKey);
+    public static PublicKey getPublicKey(String algorithm, String publicKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        KeyFactory keyFactory = getKeyFactory (algorithm);
+        byte[] encodedKey = getEncodedKey (publicKey);
 
-		return keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
-	}
+        return keyFactory.generatePublic (new X509EncodedKeySpec (encodedKey));
+    }
 
-	public static PrivateKey getPrivateKey(String algorithm, String privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		KeyFactory keyFactory = getKeyFactory(algorithm);
-		byte[] encodedKey = getEncodedKey(privateKey);
+    public static PrivateKey getPrivateKey(String algorithm, String privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        KeyFactory keyFactory = getKeyFactory (algorithm);
+        byte[] encodedKey = getEncodedKey (privateKey);
 
-		return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(encodedKey));
-	}
+        return keyFactory.generatePrivate (new PKCS8EncodedKeySpec (encodedKey));
+    }
 
-	private static KeyFactory getKeyFactory(String algorithm) throws NoSuchAlgorithmException {
+    private static KeyFactory getKeyFactory(String algorithm) throws NoSuchAlgorithmException {
 
-		return KeyFactory.getInstance(algorithm);
-	}
+        return KeyFactory.getInstance (algorithm);
+    }
 
-	private static byte[] getEncodedKey(String key) {
-		byte[] encodedKey = key.getBytes();
-		return Base64.decodeBase64(encodedKey);
-	}
+    private static byte[] getEncodedKey(String key) {
+        byte[] encodedKey = key.getBytes ();
+        return Base64.decodeBase64 (encodedKey);
+    }
 }
