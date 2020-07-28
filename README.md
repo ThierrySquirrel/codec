@@ -14,7 +14,7 @@ Support function：
         <dependency>
             <artifactId>codec</artifactId>
             <groupId>com.github.thierrysquirrel</groupId>
-            <version>1.1.0-RELEASE</version>
+            <version>1.1.1-RELEASE</version>
         </dependency>
 ```
 
@@ -58,8 +58,8 @@ public class Sign {
 public class TextC {
 	public static void main(String[] args) {
 		try {
-			String encode = URLUtils.encode("https://xxx.xxx.xxx?hello=world&this=encode");
-			String decode = URLUtils.decode(encode);
+			String encode = UrlUtils.encode("https://xxx.xxx.xxx?hello=world&this=encode");
+			String decode = UrlUtils.decode(encode);
 		} catch (CodecException e) {
 			e.printStackTrace();
 			System.out.println("encode or decode fail");

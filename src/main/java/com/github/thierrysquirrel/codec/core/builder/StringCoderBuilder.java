@@ -29,8 +29,8 @@ import org.apache.commons.codec.net.URLCodec;
  * @since JDK 1.8
  */
 public class StringCoderBuilder {
-    private StringBuilder stringBuilder;
-    private URLCodec codec;
+    private static final URLCodec CODEC = new URLCodec ();
+    private final StringBuilder stringBuilder;
 
     public StringCoderBuilder() {
         stringBuilder = new StringBuilder ();
@@ -38,23 +38,14 @@ public class StringCoderBuilder {
 
     public void append(String data) {
         stringBuilder.append (data);
-        codec = new URLCodec ();
     }
 
     public void appendEncode(String data) throws EncoderException {
-        append (codec.encode (data));
+        append (CODEC.encode (data));
     }
 
     public void appendDecode(String data) throws DecoderException {
-        append (codec.decode (data));
-    }
-
-    public void appendEncodeOrDecode(String data, Boolean encode) throws EncoderException, DecoderException {
-        if (Boolean.TRUE.equals (encode)) {
-            appendEncode (data);
-        } else {
-            appendDecode (data);
-        }
+        append (CODEC.decode (data));
     }
 
     public String builder() {

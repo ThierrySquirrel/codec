@@ -18,33 +18,37 @@ package com.github.thierrysquirrel.codec.core.constants;
 
 
 /**
- * ClassName: URLCodecConstants
+ * ClassName: UrlCodecConstants
  * Description:
  * date: 2019/7/15 14:35
  *
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-public enum URLCodecConstants {
+public enum UrlCodecConstants {
     /**
      * 拆分符
      */
-    PREFIX ('?'),
+    PREFIX ("?"),
     /**
      * 连接符
      */
-    CONNECT ('='),
+    CONNECT ("="),
     /**
      * 拆分符
      */
-    SUFFIX ('&');
-    private char value;
+    SUFFIX ("&"),
+    /**
+     * 分割符
+     */
+    SEPARATOR("/");
+    private final String value;
 
-    URLCodecConstants(char value) {
+    UrlCodecConstants(String value) {
         this.value = value;
     }
 
-    public char getValue() {
+    public String getValue() {
         return value;
     }
 }

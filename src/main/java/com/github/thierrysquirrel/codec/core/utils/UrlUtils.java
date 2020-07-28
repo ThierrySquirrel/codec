@@ -16,25 +16,24 @@
 
 package com.github.thierrysquirrel.codec.core.utils;
 
-import com.github.thierrysquirrel.codec.core.constants.URLCodecConstants;
 import com.github.thierrysquirrel.codec.core.error.CodecException;
-import com.github.thierrysquirrel.codec.core.recursion.URLRecursion;
+import com.github.thierrysquirrel.codec.core.recursion.UrlRecursion;
 
 /**
- * ClassName: URLUtils
+ * ClassName: UrlUtils
  * Description:
  * date: 2019/7/15 14:42
  *
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-public class URLUtils {
-    private URLUtils() {
+public class UrlUtils {
+    private UrlUtils() {
     }
 
     public static String encode(String url) throws CodecException {
         try {
-            return new URLRecursion ().encode (url.split (String.valueOf (URLCodecConstants.CONNECT.getValue ())));
+            return new UrlRecursion (url).encode ();
         } catch (Exception e) {
             throw new CodecException ("encode失败", e);
         }
@@ -42,7 +41,7 @@ public class URLUtils {
 
     public static String decode(String url) throws CodecException {
         try {
-            return new URLRecursion ().decode (url.split (String.valueOf (URLCodecConstants.CONNECT.getValue ())));
+            return new UrlRecursion (url).decode ();
         } catch (Exception e) {
             throw new CodecException ("decode失败", e);
         }
