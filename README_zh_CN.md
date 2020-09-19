@@ -14,7 +14,7 @@
         <dependency>
             <artifactId>codec</artifactId>
             <groupId>com.github.thierrysquirrel</groupId>
-            <version>1.1.1-RELEASE</version>
+            <version>1.1.2-RELEASE</version>
         </dependency>
 ```
 
