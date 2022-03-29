@@ -14,7 +14,7 @@ Support function：
         <dependency>
             <artifactId>codec</artifactId>
             <groupId>com.github.thierrysquirrel</groupId>
-            <version>1.2.0.4-RELEASE</version>
+            <version>1.2.0.5-RELEASE</version>
         </dependency>
 ```
 
