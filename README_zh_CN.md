@@ -68,4 +68,4 @@ public class TextC {
 }
 ```
 
-![AmericanFlag](https://user-images.githubusercontent.com/49895274/184471242-c67ef730-1000-45cf-9e91-3946b1dd7cbc.jpeg)  
+![Russian flag](https://user-images.githubusercontent.com/49895274/190374435-98727b7d-0bb1-429e-a4b2-48e0129c11ba.png)
