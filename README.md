@@ -68,5 +68,5 @@ public class TextC {
 }
 ```
 
-![AmericanFlag](https://user-images.githubusercontent.com/49895274/184471231-e200a980-1c60-4416-b614-713ae1054e3c.jpeg)  
+![Russian flag](https://user-images.githubusercontent.com/49895274/190374367-8f2f92e2-083b-47e0-9385-cc54975e8e09.png)
 
