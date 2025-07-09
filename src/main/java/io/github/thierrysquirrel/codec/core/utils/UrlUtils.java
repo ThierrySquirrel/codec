@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.core.utils;
+package io.github.thierrysquirrel.codec.core.utils;
 
-import com.github.thierrysquirrel.codec.core.error.CodecException;
-import com.github.thierrysquirrel.codec.core.recursion.UrlRecursion;
+import io.github.thierrysquirrel.codec.core.error.CodecException;
+import io.github.thierrysquirrel.codec.core.recursion.UrlRecursion;
 
 /**
  * ClassName: UrlUtils

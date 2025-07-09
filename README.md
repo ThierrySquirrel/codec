@@ -13,8 +13,8 @@ Support function：
 <!--Adding dependencies to pom. XML-->
         <dependency>
             <artifactId>codec</artifactId>
-            <groupId>com.github.thierrysquirrel</groupId>
-            <version>1.2.0.5-RELEASE</version>
+            <groupId>io.github.thierrysquirrel</groupId>
+            <version>1.3.0.0-RELEASE</version>
         </dependency>
 ```
 

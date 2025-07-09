@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.core.utils;
+package io.github.thierrysquirrel.codec.core.utils;
 
-import com.github.thierrysquirrel.codec.core.constants.CodecConstants;
-import com.github.thierrysquirrel.codec.core.error.CodecException;
-import com.github.thierrysquirrel.codec.factory.utils.KeyFactoryUtils;
+import io.github.thierrysquirrel.codec.core.constants.CodecConstants;
+import io.github.thierrysquirrel.codec.core.error.CodecException;
+import io.github.thierrysquirrel.codec.factory.utils.KeyFactoryUtils;
 import org.apache.commons.codec.binary.Base64;
 
 import java.nio.charset.Charset;

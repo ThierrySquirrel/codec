@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.core.recursion;
+package io.github.thierrysquirrel.codec.core.recursion;
 
-import com.github.thierrysquirrel.codec.core.builder.StringCoderBuilder;
-import com.github.thierrysquirrel.codec.core.constants.UrlCodecConstants;
-import com.github.thierrysquirrel.codec.core.error.CodecException;
+import io.github.thierrysquirrel.codec.core.builder.StringCoderBuilder;
+import io.github.thierrysquirrel.codec.core.constants.UrlCodecConstants;
+import io.github.thierrysquirrel.codec.core.error.CodecException;
 import org.apache.commons.codec.EncoderException;
 
 import java.net.URI;

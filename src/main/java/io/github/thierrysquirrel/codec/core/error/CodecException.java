@@ -14,33 +14,27 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.core.constants;
+package io.github.thierrysquirrel.codec.core.error;
+
 
 /**
- * ClassName: CodecSizeConstants
+ * ClassName: CodecException
  * Description:
- * date: 2019/7/15 11:32
+ * date: 2019/7/15 12:05
  *
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-public enum CodecSizeConstants {
-    /**
-     * RSA最大加密明文大小
-     */
-    MAX_ENCRYPT_BLOCK (117),
-    /**
-     * RSA最大解密密文大小
-     */
-    MAX_DECRYPT_BLOCK (256);
-
-    private Integer value;
-
-    CodecSizeConstants(Integer value) {
-        this.value = value;
+public class CodecException extends Exception {
+    public CodecException(String message) {
+        super (message);
     }
 
-    public Integer getValue() {
-        return value;
+    public CodecException(Throwable cause) {
+        super (cause);
+    }
+
+    public CodecException(String message, Throwable cause) {
+        super (message, cause);
     }
 }

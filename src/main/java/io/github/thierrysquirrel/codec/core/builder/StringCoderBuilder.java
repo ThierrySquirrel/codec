@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.core.builder;
+package io.github.thierrysquirrel.codec.core.builder;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.EncoderException;

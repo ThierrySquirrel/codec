@@ -14,41 +14,33 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.core.constants;
-
+package io.github.thierrysquirrel.codec.core.constants;
 
 /**
- * ClassName: UrlCodecConstants
+ * ClassName: CodecSizeConstants
  * Description:
- * date: 2019/7/15 14:35
+ * date: 2019/7/15 11:32
  *
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-public enum UrlCodecConstants {
+public enum CodecSizeConstants {
     /**
-     * 拆分符
+     * RSA最大加密明文大小
      */
-    PREFIX ("?"),
+    MAX_ENCRYPT_BLOCK (117),
     /**
-     * 连接符
+     * RSA最大解密密文大小
      */
-    CONNECT ("="),
-    /**
-     * 拆分符
-     */
-    SUFFIX ("&"),
-    /**
-     * 分割符
-     */
-    SEPARATOR("/");
-    private final String value;
+    MAX_DECRYPT_BLOCK (256);
 
-    UrlCodecConstants(String value) {
+    private final Integer value;
+
+    CodecSizeConstants(Integer value) {
         this.value = value;
     }
 
-    public String getValue() {
+    public Integer getValue() {
         return value;
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.factory.utils;
+package io.github.thierrysquirrel.codec.factory.utils;
 
 import org.apache.commons.codec.binary.Base64;
 

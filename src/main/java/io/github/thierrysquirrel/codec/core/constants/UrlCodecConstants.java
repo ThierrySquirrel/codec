@@ -14,27 +14,41 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.core.error;
+package io.github.thierrysquirrel.codec.core.constants;
 
 
 /**
- * ClassName: CodecException
+ * ClassName: UrlCodecConstants
  * Description:
- * date: 2019/7/15 12:05
+ * date: 2019/7/15 14:35
  *
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-public class CodecException extends Exception {
-    public CodecException(String message) {
-        super (message);
+public enum UrlCodecConstants {
+    /**
+     * 拆分符
+     */
+    PREFIX ("?"),
+    /**
+     * 连接符
+     */
+    CONNECT ("="),
+    /**
+     * 拆分符
+     */
+    SUFFIX ("&"),
+    /**
+     * 分割符
+     */
+    SEPARATOR("/");
+    private final String value;
+
+    UrlCodecConstants(String value) {
+        this.value = value;
     }
 
-    public CodecException(Throwable cause) {
-        super (cause);
-    }
-
-    public CodecException(String message, Throwable cause) {
-        super (message, cause);
+    public String getValue() {
+        return value;
     }
 }

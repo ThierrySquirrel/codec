@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.thierrysquirrel.codec.core.constants;
+package io.github.thierrysquirrel.codec.core.constants;
 
 /**
  * ClassName: CodecConstants
@@ -41,7 +41,7 @@ public enum CodecConstants {
      * SHA256WithRSA
      */
     SIGN_SHA256RSA_ALGORITHMS ("SHA256WithRSA");
-    private String value;
+    private final String value;
 
 
     CodecConstants(String value) {
