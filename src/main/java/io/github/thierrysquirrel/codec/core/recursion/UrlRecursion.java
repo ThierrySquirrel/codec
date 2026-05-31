@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 the original author or authors.
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,126 +12,133 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 package io.github.thierrysquirrel.codec.core.recursion;
 
 import io.github.thierrysquirrel.codec.core.builder.StringCoderBuilder;
 import io.github.thierrysquirrel.codec.core.constants.UrlCodecConstants;
-import io.github.thierrysquirrel.codec.core.error.CodecException;
-import org.apache.commons.codec.EncoderException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ClassName: UrlRecursion
  * Description:
- * date: 2019/7/15 14:22
+ * date: 2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 25
  */
 public class UrlRecursion {
+
+    private static final Logger logger = Logger.getLogger(UrlRecursion.class.getName());
+
+
     private final StringCoderBuilder stringCoderBuilder;
     private final URI url;
     private Integer urlParamOffset;
     private Integer urlVariableOffset;
 
     public UrlRecursion(String url) throws URISyntaxException {
-        stringCoderBuilder = new StringCoderBuilder ();
-        this.url = new URI (url);
+        stringCoderBuilder = new StringCoderBuilder();
+        this.url = new URI(url);
         this.urlParamOffset = 0;
         this.urlVariableOffset = 0;
     }
 
-    public String encode() throws CodecException {
+    public String encode() {
         try {
-            appendPrefix ();
-            String path = url.getPath ();
-            if (isNotEmpty (path)) {
-                urlVariableEncode (path.split (UrlCodecConstants.SEPARATOR.getValue ()));
+            appendPrefix();
+            String path = url.getPath();
+            if (isNotEmpty(path)) {
+                urlVariableEncode(path.split(UrlCodecConstants.SEPARATOR.getValue()));
             }
-            String query = url.getQuery ();
-            if (isNotEmpty (query)) {
-                urlParamEncode (query.split (UrlCodecConstants.CONNECT.getValue ()));
+            String query = url.getQuery();
+            if (isNotEmpty(query)) {
+                urlParamEncode(query.split(UrlCodecConstants.CONNECT.getValue()));
             }
-            return builder ();
         } catch (Exception e) {
-            throw new CodecException ("encode失败", e);
+            String loeMsg = "encode Error";
+            logger.log(Level.WARNING, loeMsg, e);
         }
+        return builder();
     }
 
-    public String decode() throws CodecException {
+    public String decode() {
         try {
-            stringCoderBuilder.appendDecode (url.toString ());
-            return builder ();
+            stringCoderBuilder.appendDecode(url.toString());
         } catch (Exception e) {
-            throw new CodecException ("decode失败", e);
+            String loeMsg = "decode Error";
+            logger.log(Level.WARNING, loeMsg, e);
         }
+        return builder();
     }
 
-    public void urlVariableEncode(String[] urlVariableSplit) throws EncoderException {
+    public void urlVariableEncode(String[] urlVariableSplit) {
         if (urlVariableSplit.length < 1) {
             return;
         }
         if (urlVariableOffset < urlVariableSplit.length) {
             String urlVariable = urlVariableSplit[urlVariableOffset++];
-            if (isEmpty (urlVariable)) {
-                urlVariableEncode (urlVariableSplit);
+            if (isEmpty(urlVariable)) {
+                urlVariableEncode(urlVariableSplit);
                 return;
             }
-            stringCoderBuilder.append (UrlCodecConstants.SEPARATOR.getValue ());
-            stringCoderBuilder.appendEncode (urlVariable);
-            urlVariableEncode (urlVariableSplit);
+            stringCoderBuilder.append(UrlCodecConstants.SEPARATOR.getValue());
+            stringCoderBuilder.appendEncode(urlVariable);
+            urlVariableEncode(urlVariableSplit);
         }
     }
 
-    public void urlParamEncode(String[] urlParamSplit) throws EncoderException {
+    public void urlParamEncode(String[] urlParamSplit) {
         if (urlParamSplit.length < 1) {
             return;
         }
         String urlParam = urlParamSplit[urlParamOffset++];
         if (urlParamOffset == 1) {
-            stringCoderBuilder.append (UrlCodecConstants.PREFIX.getValue ());
-            stringCoderBuilder.appendEncode (urlParam);
-            stringCoderBuilder.append (UrlCodecConstants.CONNECT.getValue ());
-            urlParamEncode (urlParamSplit);
+            stringCoderBuilder.append(UrlCodecConstants.PREFIX.getValue());
+            stringCoderBuilder.appendEncode(urlParam);
+            stringCoderBuilder.append(UrlCodecConstants.CONNECT.getValue());
+            urlParamEncode(urlParamSplit);
             return;
         }
-        int suffixIndexOf = urlParam.indexOf (UrlCodecConstants.SUFFIX.getValue ());
+        int suffixIndexOf = urlParam.indexOf(UrlCodecConstants.SUFFIX.getValue());
         if (suffixIndexOf != -1) {
-            String before = urlParam.substring (0, suffixIndexOf);
-            stringCoderBuilder.appendEncode (before);
-            String after = urlParam.substring (suffixIndexOf);
-            stringCoderBuilder.append (after);
-            stringCoderBuilder.append (UrlCodecConstants.CONNECT.getValue ());
-            urlParamEncode (urlParamSplit);
+            String before = urlParam.substring(0, suffixIndexOf);
+            stringCoderBuilder.appendEncode(before);
+            String after = urlParam.substring(suffixIndexOf);
+            stringCoderBuilder.append(after);
+            stringCoderBuilder.append(UrlCodecConstants.CONNECT.getValue());
+            urlParamEncode(urlParamSplit);
             return;
         }
         if (urlParamOffset == urlParamSplit.length) {
-            stringCoderBuilder.appendEncode (urlParam);
+            stringCoderBuilder.appendEncode(urlParam);
         }
 
     }
+
     private void appendPrefix() {
-        String host = url.getHost ();
-        String uriString = url.toString ();
-        int hostIndex = uriString.indexOf (host);
-        String uriPrefix = uriString.substring (0, hostIndex);
-        stringCoderBuilder.append (uriPrefix);
-        stringCoderBuilder.append (host);
+        String host = url.getHost();
+        String uriString = url.toString();
+        int hostIndex = uriString.indexOf(host);
+        String uriPrefix = uriString.substring(0, hostIndex);
+        stringCoderBuilder.append(uriPrefix);
+        stringCoderBuilder.append(host);
     }
 
     private String builder() {
-        return stringCoderBuilder.builder ();
+        return stringCoderBuilder.builder();
     }
 
     private boolean isEmpty(String string) {
-        return (null == string || "".equals (string));
+        return (null == string || "".equals(string));
     }
 
     private boolean isNotEmpty(String string) {
-        return !isEmpty (string);
+        return !isEmpty(string);
     }
 }

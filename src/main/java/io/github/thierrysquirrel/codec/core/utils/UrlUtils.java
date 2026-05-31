@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 the original author or authors.
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,38 +12,47 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 package io.github.thierrysquirrel.codec.core.utils;
 
-import io.github.thierrysquirrel.codec.core.error.CodecException;
 import io.github.thierrysquirrel.codec.core.recursion.UrlRecursion;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ClassName: UrlUtils
  * Description:
- * date: 2019/7/15 14:42
+ * date: 2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 25
  */
 public class UrlUtils {
+
+    private static final Logger logger = Logger.getLogger(UrlUtils.class.getName());
+
     private UrlUtils() {
     }
 
-    public static String encode(String url) throws CodecException {
+    public static String encode(String url) {
         try {
-            return new UrlRecursion (url).encode ();
+            return new UrlRecursion(url).encode();
         } catch (Exception e) {
-            throw new CodecException ("encode失败", e);
+            String loeMsg = "encode error";
+            logger.log(Level.WARNING, loeMsg, e);
+            return loeMsg;
         }
     }
 
-    public static String decode(String url) throws CodecException {
+    public static String decode(String url) {
         try {
-            return new UrlRecursion (url).decode ();
+            return new UrlRecursion(url).decode();
         } catch (Exception e) {
-            throw new CodecException ("decode失败", e);
+            String loeMsg = "decode error";
+            logger.log(Level.WARNING, loeMsg, e);
+            return loeMsg;
         }
     }
 }

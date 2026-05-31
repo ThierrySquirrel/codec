@@ -1,46 +1,51 @@
 /**
- * Copyright 2019 the original author or authors.
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
- * Licensed under the Apache License, Version 2.0 (the  )License ));
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an  )AS IS ) BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 package io.github.thierrysquirrel.codec.core.constants;
 
 /**
  * ClassName: CodecConstants
  * Description:
- * date: 2019/7/15 11:44
+ * date: 2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 25
  */
 public enum CodecConstants {
+
+    /**
+     * Base64
+     */
+    BASE_64_REGULAR_EXPRESSION("[^A-Za-z0-9+/=]"),
     /**
      * RSA
      */
-    SIGN_TYPE_RSA ("RSA"),
+    SIGN_TYPE_RSA("RSA"),
     /**
      * RSA2
      */
-    SIGN_TYPE_RSA2 ("RSA2"),
+    SIGN_TYPE_RSA2("RSA2"),
     /**
      * SHA1WithRSA
      */
-    SIGN_ALGORITHMS ("SHA1WithRSA"),
+    SIGN_ALGORITHMS("SHA1WithRSA"),
     /**
      * SHA256WithRSA
      */
-    SIGN_SHA256RSA_ALGORITHMS ("SHA256WithRSA");
+    SIGN_SHA256RSA_ALGORITHMS("SHA256WithRSA");
     private final String value;
 
 

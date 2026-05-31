@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 the original author or authors.
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 package io.github.thierrysquirrel.codec.core.constants;
 
@@ -20,24 +20,24 @@ package io.github.thierrysquirrel.codec.core.constants;
 /**
  * ClassName: UrlCodecConstants
  * Description:
- * date: 2019/7/15 14:35
+ * date: 2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 25
  */
 public enum UrlCodecConstants {
     /**
      * 拆分符
      */
-    PREFIX ("?"),
+    PREFIX("?"),
     /**
      * 连接符
      */
-    CONNECT ("="),
+    CONNECT("="),
     /**
      * 拆分符
      */
-    SUFFIX ("&"),
+    SUFFIX("&"),
     /**
      * 分割符
      */

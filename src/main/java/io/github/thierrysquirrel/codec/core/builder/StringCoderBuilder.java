@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 the original author or authors.
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,43 +12,42 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 package io.github.thierrysquirrel.codec.core.builder;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.EncoderException;
-import org.apache.commons.codec.net.URLCodec;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * ClassName: StringCoderBuilder
  * Description:
- * date: 2019/7/15 14:14
+ * date: 2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 25
  */
 public class StringCoderBuilder {
-    private static final URLCodec CODEC = new URLCodec ();
     private final StringBuilder stringBuilder;
 
     public StringCoderBuilder() {
-        stringBuilder = new StringBuilder ();
+        stringBuilder = new StringBuilder();
     }
 
     public void append(String data) {
-        stringBuilder.append (data);
+        stringBuilder.append(data);
     }
 
-    public void appendEncode(String data) throws EncoderException {
-        append (CODEC.encode (data));
+    public void appendEncode(String data) {
+        append(URLEncoder.encode(data, StandardCharsets.UTF_8));
     }
 
-    public void appendDecode(String data) throws DecoderException {
-        append (CODEC.decode (data));
+    public void appendDecode(String data) {
+        append(URLDecoder.decode(data, StandardCharsets.UTF_8));
     }
 
     public String builder() {
-        return stringBuilder.toString ();
+        return stringBuilder.toString();
     }
 }

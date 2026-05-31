@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 the original author or authors.
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,111 +12,119 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 package io.github.thierrysquirrel.codec.core.utils;
 
 import io.github.thierrysquirrel.codec.core.constants.CodecConstants;
-import io.github.thierrysquirrel.codec.core.error.CodecException;
 import io.github.thierrysquirrel.codec.factory.utils.KeyFactoryUtils;
-import org.apache.commons.codec.binary.Base64;
 
 import java.nio.charset.Charset;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ClassName: SignUtils
  * Description:
- * date: 2019/7/15 11:57
+ * date: 2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 25
  */
 public class SignUtils {
+
+    private static final Logger logger = Logger.getLogger(SignUtils.class.getName());
+
     private SignUtils() {
     }
 
     /**
-     * 验签方法
+     * check
      *
-     * @param content   参数
-     * @param sign      签名
-     * @param publicKey 公匙
-     * @param signType  签名类型
+     * @param content   content
+     * @param sign      sign
+     * @param publicKey publicKey
+     * @param signType  signType
      * @return Boolean boolean
      */
-    private static Boolean check(String signType, String content, String publicKey, String sign) throws CodecException {
+    private static Boolean check(String signType, String content, String publicKey, String sign) {
+        publicKey = publicKey.replaceAll(CodecConstants.BASE_64_REGULAR_EXPRESSION.getValue(), "");
         try {
             Signature signature = null;
-            PublicKey pubKey = KeyFactoryUtils.getPublicKey (CodecConstants.SIGN_TYPE_RSA.getValue (), publicKey);
-            if (CodecConstants.SIGN_TYPE_RSA.getValue ().equals (signType)) {
-                signature = Signature.getInstance (CodecConstants.SIGN_ALGORITHMS.getValue ());
-            } else if (CodecConstants.SIGN_TYPE_RSA2.getValue ().equals (signType)) {
-                signature = Signature.getInstance (CodecConstants.SIGN_SHA256RSA_ALGORITHMS.getValue ());
+            PublicKey pubKey = KeyFactoryUtils.getPublicKey(CodecConstants.SIGN_TYPE_RSA.getValue(), publicKey);
+            if (CodecConstants.SIGN_TYPE_RSA.getValue().equals(signType)) {
+                signature = Signature.getInstance(CodecConstants.SIGN_ALGORITHMS.getValue());
+            } else if (CodecConstants.SIGN_TYPE_RSA2.getValue().equals(signType)) {
+                signature = Signature.getInstance(CodecConstants.SIGN_SHA256RSA_ALGORITHMS.getValue());
             } else {
-                throw new CodecException ("不是支持的签名类型");
+                return Boolean.FALSE;
             }
-            signature.initVerify (pubKey);
+            signature.initVerify(pubKey);
 
-            signature.update (content.getBytes (Charset.defaultCharset ()));
+            signature.update(content.getBytes(Charset.defaultCharset()));
 
-            return signature.verify (Base64.decodeBase64 (sign.getBytes ()));
+            return signature.verify(Base64.getDecoder().decode(sign.getBytes()));
         } catch (Exception e) {
-            throw new CodecException ("content = " + content + ",Charset.defaultCharset() = " + Charset.defaultCharset (),
-                    e);
+            String loeMsg = "content = " + content + ",Charset.defaultCharset() = " + Charset.defaultCharset();
+            logger.log(Level.WARNING, loeMsg, e);
+            return Boolean.FALSE;
         }
     }
 
-    public static Boolean rsaCheck(String content, String publicKey, String sign) throws CodecException {
-        return check (CodecConstants.SIGN_TYPE_RSA.getValue (), content, publicKey, sign);
+    public static Boolean rsaCheck(String content, String publicKey, String sign) {
+        return check(CodecConstants.SIGN_TYPE_RSA.getValue(), content, publicKey, sign);
     }
 
-    public static Boolean rsa2Check(String content, String publicKey, String sign) throws CodecException {
-        return check (CodecConstants.SIGN_TYPE_RSA2.getValue (), content, publicKey, sign);
+    public static Boolean rsa2Check(String content, String publicKey, String sign) {
+        return check(CodecConstants.SIGN_TYPE_RSA2.getValue(), content, publicKey, sign);
     }
 
     /**
-     * 签名
+     * sign
      *
-     * @param signType   签名类型
-     * @param content    参数
-     * @param privateKey 私匙
+     * @param signType   signType
+     * @param content    content
+     * @param privateKey privateKey
      * @return String
-     * @throws CodecException CodecException
      */
-    private static String sign(String signType, String content, String privateKey) throws CodecException {
+    private static String sign(String signType, String content, String privateKey) {
+        privateKey = privateKey.replaceAll(CodecConstants.BASE_64_REGULAR_EXPRESSION.getValue(), "");
+        byte[] signed = null;
         try {
-            PrivateKey priKey = KeyFactoryUtils.getPrivateKey (CodecConstants.SIGN_TYPE_RSA.getValue (), privateKey);
+            PrivateKey priKey = KeyFactoryUtils.getPrivateKey(CodecConstants.SIGN_TYPE_RSA.getValue(), privateKey);
             Signature signature;
-            if (CodecConstants.SIGN_TYPE_RSA.getValue ().equals (signType)) {
-                signature = Signature.getInstance (CodecConstants.SIGN_ALGORITHMS.getValue ());
-            } else if (CodecConstants.SIGN_TYPE_RSA2.getValue ().equals (signType)) {
-                signature = Signature.getInstance (CodecConstants.SIGN_SHA256RSA_ALGORITHMS.getValue ());
+            if (CodecConstants.SIGN_TYPE_RSA.getValue().equals(signType)) {
+                signature = Signature.getInstance(CodecConstants.SIGN_ALGORITHMS.getValue());
+            } else if (CodecConstants.SIGN_TYPE_RSA2.getValue().equals(signType)) {
+                signature = Signature.getInstance(CodecConstants.SIGN_SHA256RSA_ALGORITHMS.getValue());
             } else {
-                throw new CodecException ("不是支持的签名类型 : : signType=" + signType);
+                return "sign Error";
             }
 
-            signature.initSign (priKey);
+            signature.initSign(priKey);
 
-            signature.update (content.getBytes (Charset.defaultCharset ()));
+            signature.update(content.getBytes(Charset.defaultCharset()));
 
-            byte[] signed = signature.sign ();
+            signed = signature.sign();
 
-            return new String (Base64.encodeBase64 (signed));
+
         } catch (Exception e) {
-            throw new CodecException ("content = " + content + ",Charset.defaultCharset() = " + Charset.defaultCharset (),
-                    e);
+            String loeMsg = "content = " + content + ",Charset.defaultCharset() = " + Charset.defaultCharset();
+            logger.log(Level.WARNING, loeMsg, e);
         }
+        return new String(Base64.getEncoder().encode(signed));
 
     }
 
-    public static String rsaSign(String content, String privateKey) throws CodecException {
-        return sign (CodecConstants.SIGN_TYPE_RSA.getValue (), content, privateKey);
+    public static String rsaSign(String content, String privateKey) {
+        return sign(CodecConstants.SIGN_TYPE_RSA.getValue(), content, privateKey);
     }
 
-    public static String rsa2Sign(String content, String privateKey) throws CodecException {
-        return sign (CodecConstants.SIGN_TYPE_RSA2.getValue (), content, privateKey);
+    public static String rsa2Sign(String content, String privateKey) {
+        return sign(CodecConstants.SIGN_TYPE_RSA2.getValue(), content, privateKey);
     }
 }

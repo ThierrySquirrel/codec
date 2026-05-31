@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 the original author or authors.
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 package io.github.thierrysquirrel.codec.core.error;
 
@@ -20,21 +20,21 @@ package io.github.thierrysquirrel.codec.core.error;
 /**
  * ClassName: CodecException
  * Description:
- * date: 2019/7/15 12:05
+ * date: 2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 25
  */
 public class CodecException extends Exception {
     public CodecException(String message) {
-        super (message);
+        super(message);
     }
 
     public CodecException(Throwable cause) {
-        super (cause);
+        super(cause);
     }
 
     public CodecException(String message, Throwable cause) {
-        super (message, cause);
+        super(message, cause);
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 the original author or authors.
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,11 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 
 package io.github.thierrysquirrel.codec.factory.utils;
 
-import org.apache.commons.codec.binary.Base64;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -25,40 +24,64 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ClassName: KeyFactoryUtils
  * Description:
- * date: 2019/7/15 11:24
+ * date: 2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 25
  */
 public class KeyFactoryUtils {
+
+    private static final Logger logger = Logger.getLogger(KeyFactoryUtils.class.getName());
+
     private KeyFactoryUtils() {
     }
 
-    public static PublicKey getPublicKey(String algorithm, String publicKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        KeyFactory keyFactory = getKeyFactory (algorithm);
-        byte[] encodedKey = getEncodedKey (publicKey);
+    public static PublicKey getPublicKey(String algorithm, String publicKey) {
+        KeyFactory keyFactory = getKeyFactory(algorithm);
+        byte[] encodedKey = getEncodedKey(publicKey);
 
-        return keyFactory.generatePublic (new X509EncodedKeySpec (encodedKey));
+        try {
+            return keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
+        } catch (InvalidKeySpecException e) {
+            String loeMsg = "getPublicKey Error";
+            logger.log(Level.WARNING, loeMsg, e);
+            return null;
+        }
     }
 
-    public static PrivateKey getPrivateKey(String algorithm, String privateKey) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        KeyFactory keyFactory = getKeyFactory (algorithm);
-        byte[] encodedKey = getEncodedKey (privateKey);
+    public static PrivateKey getPrivateKey(String algorithm, String privateKey) {
+        KeyFactory keyFactory = getKeyFactory(algorithm);
+        byte[] encodedKey = getEncodedKey(privateKey);
 
-        return keyFactory.generatePrivate (new PKCS8EncodedKeySpec (encodedKey));
+        try {
+            return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(encodedKey));
+        } catch (InvalidKeySpecException e) {
+            String loeMsg = "getPrivateKey Error";
+            logger.log(Level.WARNING, loeMsg, e);
+            return null;
+        }
     }
 
-    private static KeyFactory getKeyFactory(String algorithm) throws NoSuchAlgorithmException {
+    private static KeyFactory getKeyFactory(String algorithm) {
 
-        return KeyFactory.getInstance (algorithm);
+        try {
+            return KeyFactory.getInstance(algorithm);
+        } catch (NoSuchAlgorithmException e) {
+            String loeMsg = "getKeyFactory Error";
+            logger.log(Level.WARNING, loeMsg, e);
+            return null;
+        }
     }
 
     private static byte[] getEncodedKey(String key) {
-        byte[] encodedKey = key.getBytes ();
-        return Base64.decodeBase64 (encodedKey);
+        byte[] encodedKey = key.getBytes();
+        return Base64.getDecoder().decode(encodedKey);
     }
 }
